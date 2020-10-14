@@ -2,8 +2,8 @@
 :- nl,nl,write('Digite \'preguntar.\' para iniciar:  ?- preguntar. '), nl,nl,nl.
 
 :- dynamic ancestro/2.
-:- dynamic hombre/2.
-:- dynamic mujer/2.
+:- dynamic hombre/1.
+:- dynamic mujer/1.
 
 ancestro(flor,juana).
 ancestro(flor,maria).
