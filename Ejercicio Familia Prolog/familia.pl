@@ -47,6 +47,19 @@ hermano(X,Y):-((madre(Z,X),madre(Z,Y));(padre(W,X),padre(W,Y))), X\=Y.
 tia(X,Y):-hermano(X,Z),ancestro(Z,Y),mujer(X).
 tio(X,Y):-hermano(X,Z),ancestro(Z,Y),hombre(X).
 
+abuelo(X,Y):-padre(X,W),padre(W,Y).
+abuelo(X,Y):-padre(X,W),madre(W,Y).
+abuela(X,Y):-madre(X,W),padre(W,Y).
+abuela(X,Y):-madre(X,W),madre(W,Y).
+bisabuelo(X,Y):-padre(X,W),abuelo(W,Y).
+bisabuelo(X,Y):-padre(X,W),abuela(W,Y).
+bisabuela(X,Y):-madre(X,W),abuelo(W,Y).
+bisabuela(X,Y):-madre(X,W),abuela(W,Y).
+primo(X,Y):-tio(W,X),padre(W,Y),hombre(X).
+primo(X,Y):-tia(W,X),madre(W,Y),hombre(X).
+prima(X,Y):-tio(W,X),padre(W,Y),mujer(X).
+prima(X,Y):-tia(W,X),madre(W,Y),mujer(X).
+
 % Comentarioxd
 
 undo :- ancestro(_ ,_),fail.
