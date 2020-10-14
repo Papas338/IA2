@@ -1,3 +1,6 @@
+% Hechos y reglas
+:- nl,nl,write('Digite \'preguntar.\' para iniciar:  ?- preguntar. '), nl,nl,nl.
+
 :- dynamic ancestro/2.
 :- dynamic hombre/2.
 :- dynamic mujer/2.
@@ -60,9 +63,16 @@ primo(X,Y):-tia(W,X),madre(W,Y),hombre(X).
 prima(X,Y):-tio(W,X),padre(W,Y),mujer(X).
 prima(X,Y):-tia(W,X),madre(W,Y),mujer(X).
 
-% Comentarioxd
+preguntar:-
+ write('Digite el nombre del ancestro (con min�scula y terminando con punto) '),  read(Ancestro), nl,
+ write('El ancestro es hombre (h) o mujer (m)? (con min�scula y terminando con punto) '), 
+ read(Genero), nl, ((Genero==h)->assert(hombre(Ancestro));(Genero==m)->assert(mujer(Ancestro))),
+ write('Digite el nombre de la descendiente  (con min�scula y terminando con punto)'),  read(Descendiente), nl,
+ assert(ancestro(Ancestro,Descendiente)),repetir.
+
+repetir:- write('desea incluir otro ancestro y su descendiente? (si/no) '), read(Respuesta),nl, ((Respuesta==si)->preguntar;fail).
 
 undo :- ancestro(_ ,_),fail.
-undo :- hombre(_ ,_),fail.
-undo :- mujer(_ ,_),fail.
+undo :- hombre(_),fail.
+undo :- mujer(_),fail.
 undo.
