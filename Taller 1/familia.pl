@@ -76,3 +76,38 @@ undo :- ancestro(_ ,_),fail.
 undo :- hombre(_),fail.
 undo :- mujer(_),fail.
 undo.
+
+
+caracteristicas(X,Inicio,Final,Lugarinicio,Especie_origen,Cantidad_afectados,Causa,Tipo,Mecanismo_transmision,Sintomas,Tratamiento):- (
+	periodo(X,Inicio,Final),lugarinicio(X,Lugarinicio),origen(X,Especie_origen),cantidadafectados(X,Cantidad_afectados),
+	causa(X,Causa),virusobacteria(Causa,Tipo),transmision(X,Mecanismo_transmision),tratamiento(X,Tratamiento),sintoma(X,Sintomas)
+	).
+
+enfermedad:-
+	write('Digite el nombre de la enfermedad (con min�scula y terminando con punto) '),  read(Enfermedad), nl,
+	(
+		(
+			(pandemia(Enfermedad)==true->(caracteristicas(Enfermedad,Inicio,Final,Lugarinicio,Especie_origen,Cantidad_afectados,Causa,Tipo,Mecanismo_transmision,Sintomas,Tratamiento),write(Inicio))
+			
+			);write('No hay resultados :c')
+		)
+	).
+
+ingresarenfermedad:-(write('Digite el nombre de la enfermedad (con min�scula y terminando con punto) '),  read(Enfermedad), nl,
+	write('Digite la fecha de inicio (con min�scula y terminando con punto) ')read(Inicio), nl,
+	write('Digite la fecha de terminación (año o actualidad o desconocido) (con min�scula y terminando con punto) ')read(Fin), nl,
+	write('Digite el lugar de inicio (con min�scula y terminando con punto) ')read(Lugar), nl,
+	write('Digite el origen (especie o animal) (con min�scula y terminando con punto) ')read(Origen), nl,
+	write('Digite la causa (nombre del virus o bacteria o prion) (con min�scula y terminando con punto) ')read(Causa), nl,
+	write('Digite la Tipo de la causa (virus o bacteria o prion) (con min�scula y terminando con punto) ')read(Tipo_causa), nl,
+	write('Digite el tiempo de incubación minimo (con min�scula y terminando con punto) ')read(Encubacionmin), nl,
+	write('Digite el tiempo de incubación maximo (con min�scula y terminando con punto) ')read(Encubacionmax), nl,
+	write('Digite el modo de transmision (aerea, sexual, etc) (con min�scula y terminando con punto) ')read(Transmision), nl,
+	write('Digite la cantidad de muertos (con min�scula y terminando con punto) ')read(Muertos), nl,
+	write('Digite la tasa de letalidad (porcentaje de 0 a 1) (con min�scula y terminando con punto) ')read(Tasa), nl,
+	pandemia(Enfermedad),inicio(Enfermedad,Inicio),fin(Enfermedad,Fin),lugarinicio(Enfermedad,Lugar),
+	origen(Enfermedad,Origen),causa(Enfermedad,Causa),tipo(Causa,Tipo_causa),encubacionmin(Causa,Encubacionmin),
+	encubacionmax(Causa,Encubacionmax),transmision(Enfermedad,Transmision),muertos(Enfermedad,Muertos),
+	tasaletalidad(Enfermedad,Tasa), nl,
+	write('Si deseas ingresar sintomas, medicamentos o efectos secundarios a estos, usa otra opcion'),nl
+	).
